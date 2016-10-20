@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: democonsul
+  cloud:
+    consul:
+      host: 192.168.99.100
+      port: 8500
+      discovery:
+        healthCheckPath: /health
+        healthCheckInterval: 15s
+        tags: foo=bar, baz
+        preferIpAddress: true
+        instanceId: instance_${random.value}
