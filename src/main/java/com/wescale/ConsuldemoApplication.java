@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,12 +22,9 @@ public class ConsuldemoApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsuldemoApplication.class);
     
-    @Value("${spring.cloud.consul.discovery.instanceId}")
-    private String instanceId;
-    
     @RequestMapping("/")
     public String home() {
-        logger.info(instanceId);
+    	logger.info("call api");
         return "Hello Docker World";
     }
 	public static void main(String[] args) {
