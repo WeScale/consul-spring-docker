@@ -22,10 +22,13 @@ public class ConsuldemoApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsuldemoApplication.class);
     
+    @Value("${spring.cloud.consul.discovery.instanceId}")
+    private String instanceId;
+    
     @RequestMapping("/")
     public String home() {
     	logger.info("call api");
-        return "Hello Docker World";
+        return "Hello Docker World on " + instanceId;
     }
 	public static void main(String[] args) {
 		SpringApplication.run(ConsuldemoApplication.class, args);
