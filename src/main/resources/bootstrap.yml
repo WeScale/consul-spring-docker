@@ -1,13 +1,39 @@
+server:
+  port: 80
+  
 spring:
+  profiles: default
   application:
     name: democonsul
   cloud:
+    inetutils:
+      preferred-networks:
+        - ${NETWORK}
     consul:
-      host: 192.168.99.100
+      host: ${CONSUL_HOST}
       port: 8500
       discovery:
+        preferIpAddress: true
         healthCheckPath: /health
         healthCheckInterval: 15s
         tags: foo=bar, baz
-        preferIpAddress: true
-        instanceId: instance_${random.value}
+        instanceId: ${spring.application.name}:instance_${random.value}
+        
+---
+server:
+  port: 8081
+  
+spring:
+  profiles: test
+  application:
+    name: democonsultest
+  cloud:
+    bus:
+      enabled: false
+    consul:
+      enabled: false
+      config:
+        enabled: false
+      discovery:
+        enabled: false
+        instanceId: test-instance
